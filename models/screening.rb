@@ -31,8 +31,8 @@ class Screening
   end
 
   def count_tickets_bought_by_customer_id(customer_id)
-    sql = "SELECT COUNT(tickets.id) nb_tickets FROM TICKETS WHERE tickets.customer_id = $1"
-    return Helper.sql_run(sql, [customer_id]).first()['nb_tickets']
+    sql = "SELECT COUNT(tickets.id) nb_tickets FROM TICKETS WHERE tickets.customer_id = $1 and tickets.screening_id = $2"
+    return Helper.sql_run(sql, [customer_id, @id]).first()['nb_tickets'].to_i
   end
 
 

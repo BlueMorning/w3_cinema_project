@@ -34,6 +34,11 @@ class Customer
     return Helper.sql_run_and_map(sql, [@id], Film)
   end
 
+  def count_tickets_bought_by_screening(screening_id)
+    sql = "SELECT COUNT(tickets.id) nb_tickets FROM TICKETS WHERE tickets.customer_id = $1 and tickets.screening_id = $2"
+    return Helper.sql_run(sql, [@id, screening_id]).first()['nb_tickets'].to_i
+  end
+
   #Class Methods
   def Customer.get_customer_by_id(id)
     sql = "SELECT name, funds FROM customers where customers.id = $1"

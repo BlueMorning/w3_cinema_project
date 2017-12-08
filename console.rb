@@ -117,5 +117,8 @@ p jessica.get_all_booked_films()
 
 p odeon.screenings.first().get_all_distinct_customer()
 
-puts "Nb tickets bought :"
+puts "Nb tickets bought for the screening by Jessica:"
 p odeon.screenings.first().count_tickets_bought_by_customer_id(jessica.id)
+
+puts "Nb tickets bought by Jessica for the screening :"
+puts jessica.count_tickets_bought_by_screening(odeon.screenings.first().id)
