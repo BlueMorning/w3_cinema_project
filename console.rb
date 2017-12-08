@@ -17,8 +17,20 @@ Helper.sql_run_no_prepare(File.read('./db/cinema_database.sql'));
 # Insert test
 bruce = Customer.new({'name' => 'Bruce', 'funds' => 45.7})
 bruce.save()
+
+jessica = Customer.new({'name' => 'Jessica', 'funds' => 87.2})
+jessica.save()
+
 # Update test
 bruce.funds -= 10;
 bruce.save()
 # Get test
 bruce = Customer.get_customer_by_id(bruce.id)
+
+puts "2 customers added :"
+puts "nb customers = #{Customer.get_all_customers().count()}"
+
+Customer.delete_customer_by_id(bruce.id)
+
+puts "1 customer deleted : "
+puts "nb customers = #{Customer.get_all_customers().count()}"

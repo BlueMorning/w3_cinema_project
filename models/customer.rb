@@ -22,9 +22,18 @@ class Customer
   #Class Methods
   def Customer.get_customer_by_id(id)
     sql = "SELECT name, funds FROM customers where customers.id = $1"
-    return Helper.sql_run_and_map(sql, [id], Customer)
+    return Helper.sql_run_and_map(sql, [id], Customer).first()
   end
 
+  def Customer.get_all_customers()
+    sql = "SELECT name, funds FROM customers"
+    return Helper.sql_run_and_map(sql, [], Customer)
+  end
+
+  def Customer.delete_customer_by_id(id)
+    sql = "DELETE FROM customers where customers.id = $1"
+    Helper.sql_run(sql, [id])
+  end
 
 
   private # Methods which have to remain as private
