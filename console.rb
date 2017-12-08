@@ -3,6 +3,7 @@ require_relative('./helpers/helper')
 require_relative('models/customer')
 require_relative('models/film')
 require_relative('models/cinema')
+require_relative('models/screening')
 
 # Reinit the tables by running the sql file
 Helper.sql_run_no_prepare(File.read('./db/cinema_database.sql'));
@@ -73,6 +74,8 @@ Film.delete_film_by_id(predator.id)
 puts "1 film deleted : "
 puts "nb films = #{Film.get_all_films().count()}"
 
+predator = Film.new("title" => "Predator")
+predator.save()
 
 ###### CINEMAS ######
 odeon = Cinema.new({"name" => "Odeon", "address" => "56 Castle Terrace"})
@@ -98,3 +101,11 @@ puts "nb cinemas : #{Cinema.get_all_cinemas().count()}"
 Cinema.delete_cinema_by_id(odeon.id)
 puts "1 cinema deleted : "
 puts "nb cinemas : #{Cinema.get_all_cinemas().count()}"
+
+odeon = Cinema.new({"name" => "Odeon", "address" => "56 Castle Terrace"})
+odeon.save()
+
+
+###### SCREENINGS ######
+odeon.add_screening(predator, Time.now, 400)
+odeon.add_screening(endless_summer, Time.now+7200, 300)

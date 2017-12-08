@@ -31,18 +31,17 @@ CREATE TABLE cinemas (
 -- A screening is linked to 1 cinema and 1 movie
 CREATE TABLE screenings (
   id SERIAL4 PRIMARY KEY,
-  date DATE,
-  time TIME,
-  nb_places_max INT2,
-  film_id INT REFERENCES films(id),
-  cinema_id INT REFERENCES cinemas(id)
+  date timestamp NOT NULL,
+  nb_places_max INT2 NOT NULL,
+  film_id INT REFERENCES films(id) NOT NULL,
+  cinema_id INT REFERENCES cinemas(id) NOT NULL
 );
 
 -- Create the table tickets
 -- A ticket is linked to 1 customer and 1 screening
 CREATE TABLE tickets (
   id SERIAL4 PRIMARY KEY,
-  price FLOAT,
-  customer_id INT REFERENCES customers(id),
-  screening_id INT REFERENCES screenings(id)
+  price FLOAT NOT NULL,
+  customer_id INT REFERENCES customers(id) NOT NULL,
+  screening_id INT REFERENCES screenings(id) NOT NULL
 );

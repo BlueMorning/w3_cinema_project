@@ -7,9 +7,10 @@ class Cinema
 
 
   def initialize(options)
-    @id       = options['id'] if options.include?(options['id'])
-    @name     = options['name']
-    @address  = options['address']
+    @id           = options['id'] if options.include?(options['id'])
+    @name         = options['name']
+    @address      = options['address']
+    @screenings   = []
   end
 
   def save()
@@ -20,7 +21,20 @@ class Cinema
     end
   end
 
+  def add_screening(film, date, nb_places_max)
+    screening = Screening.new({ "film_id"       => film.id,
+                                "date"          => date,
+                                "nb_places_max" => nb_places_max,
+                                "cinema_id"     => @id})
 
+    screening.save()
+    return screening
+  end
+
+  def get_all_screenings()
+    @screenings = Screenings.get_screening_by_cinema_id(@id)
+    return @screenings
+  end
 
   #Class Methods
 
