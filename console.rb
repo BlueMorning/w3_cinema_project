@@ -110,9 +110,12 @@ odeon.save()
 odeon.add_screening(predator, Time.now, 400)
 odeon.add_screening(endless_summer, Time.now+7200, 300)
 
-odeon.create_tickets(odeon.screenings.first(), jessica, 10, 3)
+odeon.create_tickets(odeon.screenings.first(), jessica, 10, 5)
 
 puts jessica.get_all_booked_films().count()
 p jessica.get_all_booked_films()
 
 p odeon.screenings.first().get_all_distinct_customer()
+
+puts "Nb tickets bought :"
+p odeon.screenings.first().count_tickets_bought_by_customer_id(jessica.id)
