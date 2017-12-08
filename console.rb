@@ -29,7 +29,7 @@ Customer.delete_all_customers()
 bruce = Customer.new({'name' => 'Bruce', 'funds' => 45.7})
 bruce.save()
 
-jessica = Customer.new({'name' => 'Jessica', 'funds' => 87.2})
+jessica = Customer.new({'name' => 'Jessica', 'funds' => 187.2})
 jessica.save()
 
 # Update test
@@ -107,10 +107,33 @@ odeon.save()
 
 
 ###### SCREENINGS ######
-odeon.add_screening(predator, Time.now, 400)
-odeon.add_screening(endless_summer, Time.now+7200, 300)
+jason = Customer.new({'name' => 'Jason', 'funds' => 400.9})
+jason.save()
 
-odeon.create_tickets(odeon.screenings.first(), jessica, 10, 5)
+bruce = Customer.new({'name' => 'Bruce', 'funds' => 350.7})
+bruce.save()
+
+odeon.add_screening(predator, "2017-12-08 20:00:00 +0000", 400)
+odeon.add_screening(predator, "2017-12-08 22:00:00 +0000", 300)
+odeon.add_screening(predator, "2017-12-10 19:30:00 +0000", 200)
+odeon.add_screening(predator, "2017-12-15 22:00:00 +0000", 300)
+#odeon.add_screening(endless_summer, "2017-12-08 19:00:00 +0000", 300)
+
+
+#10 tickets
+odeon.create_tickets(odeon.screenings[0], jason, 6.5, 10)
+
+#12 tickets
+odeon.create_tickets(odeon.screenings[1], jessica, 8.5, 5)
+odeon.create_tickets(odeon.screenings[1], bruce, 12, 3)
+odeon.create_tickets(odeon.screenings[3], jason, 10, 4)
+
+#11 tickets
+odeon.create_tickets(odeon.screenings[2], jessica, 12, 5)
+odeon.create_tickets(odeon.screenings[2], jason, 7, 6)
+
+
+
 
 puts jessica.get_all_booked_films().count()
 p jessica.get_all_booked_films()
@@ -125,3 +148,6 @@ puts jessica.count_tickets_bought_by_screening(odeon.screenings.first().id)
 
 puts "Nb customers for Predator"
 puts predator.count_customers()
+
+puts "Most popular time"
+puts predator.get_most_popular_time()

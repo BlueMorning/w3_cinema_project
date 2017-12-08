@@ -26,6 +26,17 @@ class Film
     return Helper.sql_run(sql, [@id])[0]['nb_tickets']
   end
 
+  def get_most_popular_time()
+    sql = "SELECT COUNT(table_data.all_date) count_most_popular_date, table_data.all_date  FROM
+           ( SELECT (extract(HOUR from screenings.date)||':'||extract(MINUTE from screenings.date)) all_date
+             FROM tickets
+             INNER JOIN screenings ON tickets.screening_id = screenings.id
+             WHERE screenings.film_id = $1
+           ) table_data
+          GROUP BY table_data.all_date ORDER BY count_most_popular_date DESC LIMIT 1"
+    return Helper.sql_run(sql, [@id])[0]['all_date']
+  end
+
   #Class Methods
   def Film.get_film_by_id(id)
     sql = "SELECT id, title FROM films WHERE films.id = $1"
