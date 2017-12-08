@@ -25,6 +25,15 @@ class Customer
     save()
   end
 
+  def get_all_booked_films()
+    sql = "SELECT title FROM films
+           INNER JOIN screenings ON films.id             = screenings.film_id
+           INNER JOIN tickets    ON screenings.id        = tickets.screening_id
+           INNER JOIN customers  ON tickets.customer_id  = customers.id
+           WHERE customers.id = $1"
+    return Helper.sql_run_and_map(sql, [@id], Customer)
+  end
+
   #Class Methods
   def Customer.get_customer_by_id(id)
     sql = "SELECT name, funds FROM customers where customers.id = $1"
