@@ -42,10 +42,7 @@ class Ticket
     return Helper.sql_run(sql, [id])
   end
 
-  def Ticket.get_nb_tickets_by_screening_id(screening_id)
-    sql = "SELECT COUNT(tickets.id) nb_sold_tickets FROM tickets WHERE screening_id = $1"
-    return Helper.sql_run(sql, [screening_id]).first()['nb_sold_tickets'].to_i()
-  end
+  
 
   private
 

@@ -36,7 +36,7 @@ class Cinema
   end
 
   def create_tickets(screening, customer, price, nb_wanted_tickets = 1)
-    nb_places_left     = screening.nb_places_max - Ticket.get_nb_tickets_by_screening_id(screening.id)
+    nb_places_left     = screening.nb_places_max - Screening.get_nb_tickets_by_screening_id(screening.id)
     return nil if nb_wanted_tickets > nb_places_left
 
     while(nb_wanted_tickets > 0)

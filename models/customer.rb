@@ -31,7 +31,7 @@ class Customer
            INNER JOIN tickets    ON screenings.id        = tickets.screening_id
            INNER JOIN customers  ON tickets.customer_id  = customers.id
            WHERE customers.id = $1"
-    return Helper.sql_run_and_map(sql, [@id], Customer)
+    return Helper.sql_run_and_map(sql, [@id], Film)
   end
 
   #Class Methods
