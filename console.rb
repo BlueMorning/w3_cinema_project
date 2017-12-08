@@ -122,3 +122,6 @@ p odeon.screenings.first().count_tickets_bought_by_customer_id(jessica.id)
 
 puts "Nb tickets bought by Jessica for the screening :"
 puts jessica.count_tickets_bought_by_screening(odeon.screenings.first().id)
+
+puts "Nb customers for Predator"
+puts predator.count_customers()

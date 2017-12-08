@@ -18,7 +18,13 @@ class Film
     end
   end
 
-
+  def count_customers()
+    sql = "SELECT COUNT(tickets.id) nb_tickets FROM tickets
+           INNER JOIN screenings ON tickets.screening_id = screenings.id
+           INNER JOIN films      ON screenings.film_id   = films.id
+           WHERE films.id = $1"
+    return Helper.sql_run(sql, [@id])[0]['nb_tickets']
+  end
 
   #Class Methods
   def Film.get_film_by_id(id)
