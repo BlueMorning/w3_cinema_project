@@ -109,3 +109,5 @@ odeon.save()
 ###### SCREENINGS ######
 odeon.add_screening(predator, Time.now, 400)
 odeon.add_screening(endless_summer, Time.now+7200, 300)
+
+odeon.create_tickets(odeon.screenings.first(), jessica, 10, 3)

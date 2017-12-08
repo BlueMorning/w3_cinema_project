@@ -20,6 +20,10 @@ class Customer
     end
   end
 
+  def do_payment(price)
+    @funds -= price;
+    save()
+  end
 
   #Class Methods
   def Customer.get_customer_by_id(id)

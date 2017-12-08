@@ -1,8 +1,11 @@
 require_relative('./../helpers/helper')
+require_relative('screening')
+require_relative('ticket')
+
 
 class Cinema
 
-  attr_reader :id
+  attr_reader :id, :screenings
   attr_accessor :name, :address
 
 
@@ -28,7 +31,21 @@ class Cinema
                                 "cinema_id"     => @id})
 
     screening.save()
+    @screenings.push(screening)
     return screening
+  end
+
+  def create_tickets(screening, customer, price, nb_wanted_tickets = 1)
+    nb_places_left     = screening.nb_places_max - Ticket.get_nb_tickets_by_screening_id(screening.id)
+    return nil if nb_wanted_tickets > nb_places_left
+
+    while(nb_wanted_tickets > 0)
+      break if customer.funds < price
+      new_ticket          = Ticket.new({"price" => price, "customer_id" => customer.id, "screening_id" => screening.id})
+      new_ticket.save()
+      customer.do_payment(price)
+      nb_wanted_tickets  -=1
+    end
   end
 
   def get_all_screenings()
