@@ -1,3 +1,5 @@
+require_relative('./../helpers/helper')
+
 class Customer
 
   attr_reader :id
@@ -26,7 +28,7 @@ class Customer
   end
 
   def Customer.get_all_customers()
-    sql = "SELECT name, funds FROM customers"
+    sql = "SELECT id, name, funds FROM customers"
     return Helper.sql_run_and_map(sql, [], Customer)
   end
 
@@ -35,8 +37,13 @@ class Customer
     Helper.sql_run(sql, [id])
   end
 
+  def Customer.delete_all_customers()
+    sql = "DELETE FROM customers"
+    Helper.sql_run(sql)
+  end
 
-  private # Methods which have to remain as private
+
+  private #Methods which have to remain as private
 
   def insert()
     sql     = "INSERT INTO customers (name, funds) VALUES ($1, $2) RETURNING id"
