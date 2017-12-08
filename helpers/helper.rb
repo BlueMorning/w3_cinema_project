@@ -10,6 +10,12 @@ class Helper
     return result
   end
 
+  def Helper.sql_run_no_prepare(sql)
+    database_connection = PG.connect({dbname: 'cinema', host: 'localhost'})
+    database_connection.exec(sql)
+    database_connection.close()
+  end
+
   def Helper.map(array, class_name)
     return array.map{|object| class_name.new(object)} if array != nil
   end
