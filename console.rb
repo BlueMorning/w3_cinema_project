@@ -151,3 +151,29 @@ puts predator.count_customers()
 
 puts "Most popular time"
 puts predator.get_most_popular_time()
+
+
+### Testing part to ensure that the class method get_all_episodes_of_a_serie returns all the episode of a serie
+### in the right order
+
+star_wars_1 = Film.new("title" => "Star Wars I")
+star_wars_1.save()
+
+star_wars_2 = Film.new("title" => "Star Wars II", "previous_episode_id" => star_wars_1.id)
+star_wars_2.save()
+
+star_wars_3 = Film.new("title" => "Star Wars III", "previous_episode_id" => star_wars_2.id)
+star_wars_3.save()
+
+star_wars_4 = Film.new("title" => "Star Wars IV", "previous_episode_id" => star_wars_3.id)
+star_wars_4.save()
+
+star_wars_5 = Film.new("title" => "Star Wars V", "previous_episode_id" => star_wars_4.id)
+star_wars_5.save()
+
+star_wars_6 = Film.new("title" => "Star Wars VI", "previous_episode_id" => star_wars_5.id)
+star_wars_6.save()
+
+p Film.get_all_episodes_of_a_serie(star_wars_1).count()
+p Film.get_all_episodes_of_a_serie(star_wars_3).count()
+p Film.get_all_episodes_of_a_serie(star_wars_6).count()

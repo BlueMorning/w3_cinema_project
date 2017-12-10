@@ -16,7 +16,8 @@ CREATE TABLE customers (
 -- A film can be proposed through * screenings
 CREATE TABLE films (
   id SERIAL4 PRIMARY KEY,
-  title VARCHAR(100) NOT NULL
+  title VARCHAR(100) NOT NULL,
+  previous_episode_id INT REFERENCES films(id) NULL
 );
 
 -- Create the table cinemas
